@@ -1,0 +1,42 @@
+.login{
+    width: 100%;
+    height: 100%;
+    background-image: url('../../assets/images/bg.png');
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    .ivu-card{
+        background-color:rgba(255,255,255,0.15);
+        color: #ffffff;
+        *{
+            color: #ffffff
+        }
+        .ivu-card-head{
+            text-align: center
+        }
+        .ivu-btn {
+            background-color: rgb(15, 188, 207)
+        }
+    }
+    &-con{
+        position: absolute;
+        right: 160px;
+        top: 50%;
+        transform: translateY(-60%);
+        width: 300px;
+        &-header{
+            font-size: 16px;
+            font-weight: 300;
+            text-align: center;
+            padding: 30px 0;
+        }
+        .form-con{
+            padding: 10px 0 0;
+        }
+        .login-tip{
+            font-size: 10px;
+            text-align: center;
+            color: #c3c3c3;
+        }
+    }
+}

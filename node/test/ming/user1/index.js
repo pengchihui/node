@@ -59,6 +59,19 @@ app.get("/",function(req,res){
 	
 })
 
+app.use("/search",function(req,res){	
+    //设置允许跨域的域名，*代表允许任意域名跨域
+    res.header("Access-Control-Allow-Origin","*");
+    //允许的header类型
+    res.header("Access-Control-Allow-Headers","content-type");
+    //跨域允许的请求方式 
+    res.header("Access-Control-Allow-Methods","DELETE,PUT,POST,GET,OPTIONS");
+	console.log()
+	user.find(req.query).then(function(data){		
+		res.send(data)
+	})	
+})
+
 /* 添加 */
 app.get("/add.html",function(req,res){
 	 res.render("add.html");
@@ -84,8 +97,16 @@ app.use("/delete",function(req,res){
 		var all=all;
 		for(var i=0;i<all.length;i++){  
 			if(all[i]._id==id){
-				  fs.unlinkSync(path.join(__dirname,all[i].picture));
-				  fs.unlinkSync(path.join(__dirname,all[i].music));
+				 if(fs.existsSync(path.join(__dirname,all[i].picture))){
+					  fs.unlink(path.join(__dirname,all[i].picture),err=>{
+						  console.log("pic删除成功");
+					  });
+				 }
+				 if(fs.existsSync(path.join(__dirname,all[i].music))){
+				 	  fs.unlink(path.join(__dirname,all[i].picture),err=>{
+				 	  	  console.log("mic删除成功");
+				 	  });
+				 }
 				  user.deleteOne({_id:id}).then(function(){
 					   res.redirect("/");
 		  		  })
@@ -132,5 +153,5 @@ app.post("/update",vv,function(req,res){
 	});
 })
 
-app.listen(8080);
+app.listen(8081);
 
